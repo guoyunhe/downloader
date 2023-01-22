@@ -4,7 +4,14 @@ import http from 'http';
 import https from 'https';
 import { dirname } from 'path';
 
-export function download(url: string, dist: string) {
+export interface DownloadOptions {
+  /**
+   * Extract zip files
+   */
+  unzip?: boolean;
+}
+
+export function download(url: string, dist: string, options?: DownloadOptions) {
   return new Promise<null>((resolve, reject) => {
     const get = url.startsWith('https://') ? https.get : http.get;
     get(url, async (res) => {
@@ -23,7 +30,7 @@ export function download(url: string, dist: string) {
         res.headers.location
       ) {
         const newUrl = res.headers.location;
-        download(newUrl, dist).then(resolve).catch(reject);
+        download(newUrl, dist, options).then(resolve).catch(reject);
       } else {
         reject(new Error('Failed to download ' + url));
       }
