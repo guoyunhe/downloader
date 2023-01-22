@@ -1,8 +1,7 @@
-import { hello } from '.';
+import { download } from '.';
 
-describe('hello()', () => {
-  it('say hello', () => {
-    expect(hello()).toBe('Hello, world!');
-    expect(hello('Bob')).toBe('Hello, Bob!');
+describe('download()', () => {
+  it('download file', async () => {
+    await download('http://redump.org/datfile/ps2/serial,version,disc', 'tmp/ps2.zip');
   });
 });
