@@ -1,5 +1,7 @@
 # download2
 
+Download and extract archives (zip, tar.gz) with less RAM usage.
+
 ## Install
 
 ```bash

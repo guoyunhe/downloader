@@ -1,8 +1,15 @@
 {
   "name": "download2",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Download and extract archives (zip, tar.gz) with less RAM usage",
+  "keywords": [
+    "download",
+    "extract",
+    "archive",
+    "unzip",
+    "decompress",
+    "node"
+  ],
   "homepage": "https://github.com/guoyunhe/download2#readme",
   "bugs": {
     "url": "https://github.com/guoyunhe/download2/issues"
@@ -11,8 +18,10 @@
     "type": "git",
     "url": "git+https://github.com/guoyunhe/download2.git"
   },
-  "license": "ISC",
-  "author": "",
+  "author": {
+    "name": "Guo Yunhe",
+    "email": "i@guoyunhe.me"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "dist/dts/index.d.ts",
@@ -40,13 +49,13 @@
     "preset": "@guoyunhe/node-scripts"
   },
   "dependencies": {
-    "commander": "^9.0.0"
+    "commander": "^9.5.0"
   },
   "devDependencies": {
-    "@guoyunhe/node-scripts": "^1.0.0",
-    "@tsconfig/node16": "^1.0.0",
-    "@types/jest": "^29.0.0",
-    "@types/node": "^16.0.0",
-    "typescript": "^4.0.0"
+    "@guoyunhe/node-scripts": "^1.5.1",
+    "@tsconfig/node16": "^1.0.3",
+    "@types/jest": "^29.2.6",
+    "@types/node": "^16.18.11",
+    "typescript": "^4.9.4"
   }
 }
