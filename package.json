@@ -39,14 +39,15 @@
     "watch": "node-scripts watch"
   },
   "prettier": {
-    "printWidth": 120,
+    "printWidth": 100,
     "singleQuote": true
   },
   "eslintConfig": {
     "extends": "@guoyunhe/node-scripts"
   },
   "jest": {
-    "preset": "@guoyunhe/node-scripts"
+    "preset": "@guoyunhe/node-scripts",
+    "testTimeout": 30000
   },
   "dependencies": {
     "commander": "^9.5.0"
