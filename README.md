@@ -24,7 +24,7 @@ const dist = createWriteStream('dist/path/to/data.zip');
 await download('https://example.com/data.zip', dist);
 ```
 
-Download and extract zip archives with [node-stream-zip](https://www.npmjs.com/package/node-stream-zip):
+Download and extract zip archives:
 
 ```ts
 import { download } from '@guoyunhe/download';
