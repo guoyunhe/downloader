@@ -1,6 +1,6 @@
 # download2
 
-Download and extract archives (zip, tar.gz) with less RAM usage.
+Download large files with minimum RAM usage.
 
 ## Install
 
@@ -10,8 +10,28 @@ npm i download2
 
 ## Usage
 
-```ts
-import { hello } from 'download2';
+Simply download a file:
 
-hello('world');
+```ts
+import { download } from 'download2';
+import { createWriteStream } from 'fs';
+
+// Specify download file path
+await download('https://example.com/data.zip', 'dist/path/to/data.zip');
+
+// Or pass a WriteStream
+const dist = createWriteStream('dist/path/to/data.zip');
+await download('https://example.com/data.zip', dist);
+```
+
+Download and extract zip archives with [node-stream-zip](https://www.npmjs.com/package/node-stream-zip):
+
+```ts
+import { download } from 'download2';
+import StreamZip from 'node-stream-zip';
+
+await download('https://example.com/data.zip', 'data.zip');
+
+const zip = new StreamZip.async({ file: 'data.zip' });
+await zip.extract(null, 'extracted-data');
 ```
