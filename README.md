@@ -1,11 +1,11 @@
-# @guoyunhe/download
+# @guoyunhe/downloader
 
 Download large files with minimum RAM usage.
 
 ## Install
 
 ```bash
-npm i @guoyunhe/download
+npm i @guoyunhe/downloader
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm i @guoyunhe/download
 Simply download a file:
 
 ```ts
-import { download } from '@guoyunhe/download';
+import { download } from '@guoyunhe/downloader';
 import { createWriteStream } from 'fs';
 
 // Specify download file path
@@ -27,7 +27,7 @@ await download('https://example.com/data.zip', dist);
 Download and extract zip archives:
 
 ```ts
-import { download } from '@guoyunhe/download';
+import { download } from '@guoyunhe/downloader';
 import StreamZip from 'node-stream-zip';
 
 await download('https://example.com/data.zip', 'data.zip');
