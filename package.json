@@ -1,5 +1,5 @@
 {
-  "name": "download2",
+  "name": "@guoyunhe/download",
   "version": "1.0.0",
   "description": "Download and extract archives (zip, tar.gz) with less RAM usage",
   "keywords": [
@@ -10,13 +10,13 @@
     "decompress",
     "node"
   ],
-  "homepage": "https://github.com/guoyunhe/download2#readme",
+  "homepage": "https://github.com/guoyunhe/download#readme",
   "bugs": {
-    "url": "https://github.com/guoyunhe/download2/issues"
+    "url": "https://github.com/guoyunhe/download/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guoyunhe/download2.git"
+    "url": "git+https://github.com/guoyunhe/download.git"
   },
   "author": {
     "name": "Guo Yunhe",
