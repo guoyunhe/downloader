@@ -1,6 +1,6 @@
 # @guoyunhe/downloader
 
-Download large files with minimum RAM usage.
+Download large files with minimum RAM usage. Support tar.gz extraction.
 
 ## Install
 
