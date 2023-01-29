@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 - 2023-01-29
+
+- Support tar.gz extraction and path strip
+
 ## 1.0.0 - 2023-01-26
 
 - Add `download()` function

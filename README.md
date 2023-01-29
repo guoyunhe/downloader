@@ -10,18 +10,28 @@ npm i @guoyunhe/downloader
 
 ## Usage
 
-Simply download a file:
-
 ```ts
 import { download } from '@guoyunhe/downloader';
 import { createWriteStream } from 'fs';
 
-// Specify download file path
-await download('https://example.com/data.zip', 'dist/path/to/data.zip');
+// Download a simple file
+await download('https://example.com/logo.png', 'dist/path/logo.png');
 
-// Or pass a WriteStream
-const dist = createWriteStream('dist/path/to/data.zip');
-await download('https://example.com/data.zip', dist);
+// Download and extract tar.gz archive
+await download('https://example.com/data.tar.gz', 'dist/path/', { extract: true });
+// Output:
+// └── export-2023-01-01
+//     └── data
+//         ├── spec.xml
+//         ├── report.pdf
+//         └── raw.dat
+
+// Reduce extraction file path by two folder
+await download('https://example.com/data.tar.gz', 'dist/path/', { extract: true, strip: 2 });
+// Output:
+// ├── spec.xml
+// ├── report.pdf
+// └── raw.dat
 ```
 
 Download and extract zip archives:

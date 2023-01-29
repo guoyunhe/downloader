@@ -4,17 +4,8 @@ import { download } from '.';
 
 describe('download()', () => {
   it('download file', async () => {
-    const url = 'http://redump.org/datfile/ps2/serial,version';
-    const dist = join('tmp', 'download', 'data.zip');
-    await rm(dist, { force: true });
-    await download(url, dist);
-    const { size } = await stat(dist);
-    expect(size).toBeGreaterThan(0);
-  });
-
-  it('handle redirect', async () => {
-    const url = 'https://source.unsplash.com/random';
-    const dist = join('tmp', 'redirect', 'random.jpg');
+    const url = 'https://github.com/PCSX2/pcsx2/raw/master/README.md';
+    const dist = join('tmp', 'README.md');
     await rm(dist, { force: true });
     await download(url, dist);
     const { size } = await stat(dist);
