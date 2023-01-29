@@ -18,6 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/guoyunhe/downloader.git"
   },
+  "license": "GPL-3.0",
   "author": {
     "name": "Guo Yunhe",
     "email": "i@guoyunhe.me"
