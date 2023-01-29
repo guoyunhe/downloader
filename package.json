@@ -18,6 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/guoyunhe/downloader.git"
   },
+  "funding": "https://github.com/sponsors/guoyunhe",
   "author": {
     "name": "Guo Yunhe",
     "email": "i@guoyunhe.me"
