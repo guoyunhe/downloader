@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0 - 2023-01-29
+
+- Remove `commander` dependency
+
 ## 1.2.1 - 2023-01-29
 
 - Add license
