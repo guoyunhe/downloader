@@ -1,37 +1,75 @@
-import { createWriteStream, WriteStream } from 'fs';
+import { createWriteStream } from 'fs';
 import { mkdir } from 'fs/promises';
 import http from 'http';
 import https from 'https';
 import { dirname } from 'path';
+import { Writable } from 'stream';
+import tar from 'tar';
 
 export interface DownloadOptions {
   /**
    * Maximum redirect times.
+   *
    * @default 5
    */
   maxRedirects?: number;
+  /**
+   * Extract *.tar.gz archives
+   *
+   * @default false
+   */
+  extract?: boolean;
+  /**
+   * Strip given number of leading components from file names before extraction.
+   *
+   * For example, if archive `archive.tar' contained `some/file/name', then `strip: 2` would extract
+   * this file to file `name`.
+   *
+   * @default 0
+   */
+  strip?: number;
 }
 
 export function download(
   /** File download URL. Must be public and support GET method. */
   url: string,
-  /** Output file path or write stream. */
-  dist: string | WriteStream,
+  /** Output file (not extract) or folder (extract) path. */
+  dist: string,
   /** Extra download options. */
   options: DownloadOptions = {}
 ) {
-  const { maxRedirects = 5 } = options;
+  const { maxRedirects = 5, extract = false, strip = 0 } = options;
   return new Promise<void>((resolve, reject) => {
     const get = url.startsWith('https://') ? https.get : http.get;
     get(url, async (res) => {
       if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-        const fileWriteStream = typeof dist === 'string' ? createWriteStream(dist) : dist;
-        if (typeof dist === 'string') {
+        let output: Writable;
+        if (
+          extract &&
+          [
+            'application/tar',
+            'application/tar+gzip',
+            'application/x-tar',
+            'application/x-gzip',
+          ].includes(res.headers['content-type'] || '')
+        ) {
+          await mkdir(dist, { recursive: true });
+          output = tar.x({
+            strip,
+            cwd: dist,
+          });
+        } else if (extract && res.headers['content-type'] === 'application/zip') {
+          console.log('Zip extraction is not supported yet.');
+          output = createWriteStream(dist);
+          await mkdir(dirname(dist), { recursive: true });
+        } else {
+          output = createWriteStream(dist);
           await mkdir(dirname(dist), { recursive: true });
         }
-        res.pipe(fileWriteStream, { end: false });
+
+        res.pipe(output, { end: false });
         res.on('end', function () {
-          fileWriteStream.end();
+          output.end();
           resolve();
         });
       } else if (
