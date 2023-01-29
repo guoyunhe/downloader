@@ -20,4 +20,13 @@ describe('download()', () => {
     const { size } = await stat(join(dist, 'README.md'));
     expect(size).toBeGreaterThan(0);
   });
+
+  it('extract zip', async () => {
+    const url = 'https://github.com/PCSX2/pcsx2/archive/refs/tags/v1.7.3977.zip';
+    const dist = join('tmp', 'extract-zip');
+    await rm(dist, { force: true, recursive: true });
+    await download(url, dist, { extract: true, strip: 1 });
+    const { size } = await stat(join(dist, 'README.md'));
+    expect(size).toBeGreaterThan(0);
+  });
 });

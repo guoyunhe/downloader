@@ -1,6 +1,6 @@
 # @guoyunhe/downloader
 
-Download large files with minimum RAM usage. Support tar.gz extraction.
+Download large files with minimum RAM usage. Support tar.gz and zip extraction.
 
 ## Install
 
@@ -10,14 +10,19 @@ npm i @guoyunhe/downloader
 
 ## Usage
 
+Download a simple file
+
 ```ts
 import { download } from '@guoyunhe/downloader';
-import { createWriteStream } from 'fs';
 
-// Download a simple file
 await download('https://example.com/logo.png', 'dist/path/logo.png');
+```
 
-// Download and extract tar.gz archive
+Download and extract tar.gz or zip archive
+
+```ts
+import { download } from '@guoyunhe/downloader';
+
 await download('https://example.com/data.tar.gz', 'dist/path/', { extract: true });
 // Output:
 // └── export-2023-01-01
@@ -25,23 +30,16 @@ await download('https://example.com/data.tar.gz', 'dist/path/', { extract: true 
 //         ├── spec.xml
 //         ├── report.pdf
 //         └── raw.dat
+```
 
-// Reduce extraction file path by two folder
+Reduce extraction file path by two folder
+
+```ts
+import { download } from '@guoyunhe/downloader';
+
 await download('https://example.com/data.tar.gz', 'dist/path/', { extract: true, strip: 2 });
 // Output:
 // ├── spec.xml
 // ├── report.pdf
 // └── raw.dat
-```
-
-Download and extract zip archives:
-
-```ts
-import { download } from '@guoyunhe/downloader';
-import StreamZip from 'node-stream-zip';
-
-await download('https://example.com/data.zip', 'data.zip');
-
-const zip = new StreamZip.async({ file: 'data.zip' });
-await zip.extract(null, 'extracted-data');
 ```

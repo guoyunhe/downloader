@@ -1,10 +1,13 @@
 import { createWriteStream } from 'fs';
-import { mkdir } from 'fs/promises';
+import { mkdir, mkdtemp } from 'fs/promises';
 import http from 'http';
 import https from 'https';
-import { dirname } from 'path';
+import StreamZip from 'node-stream-zip';
+import { tmpdir } from 'os';
+import { dirname, join } from 'path';
 import { Writable } from 'stream';
 import tar from 'tar';
+import { stripDirectory } from './stripDirectory';
 
 export interface DownloadOptions {
   /**
@@ -44,6 +47,7 @@ export function download(
     get(url, async (res) => {
       if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
         let output: Writable;
+        let zipFile: string;
         if (
           extract &&
           [
@@ -59,17 +63,23 @@ export function download(
             cwd: dist,
           });
         } else if (extract && res.headers['content-type'] === 'application/zip') {
-          console.log('Zip extraction is not supported yet.');
-          output = createWriteStream(dist);
-          await mkdir(dirname(dist), { recursive: true });
+          const tmpPrefix = join(tmpdir(), 'guoyunhe-downloader');
+          const temp = await mkdtemp(tmpPrefix);
+          zipFile = join(temp, 'archive.zip');
+          output = createWriteStream(zipFile);
         } else {
-          output = createWriteStream(dist);
           await mkdir(dirname(dist), { recursive: true });
+          output = createWriteStream(dist);
         }
 
         res.pipe(output, { end: false });
-        res.on('end', function () {
+        res.on('end', async function () {
           output.end();
+          if (zipFile) {
+            const zip = new StreamZip.async({ file: zipFile });
+            await zip.extract(null, dist);
+            await stripDirectory(dist, strip);
+          }
           resolve();
         });
       } else if (
