@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 - 2023-01-29
+
+- Add license
+
 ## 1.2.0 - 2023-01-29
 
 - Support zip extraction and path strip

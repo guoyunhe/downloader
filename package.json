@@ -1,6 +1,6 @@
 {
   "name": "@guoyunhe/downloader",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Download large files with minimum RAM usage. Support tar.gz and zip extraction.",
   "keywords": [
     "download",
@@ -18,8 +18,8 @@
     "type": "git",
     "url": "git+https://github.com/guoyunhe/downloader.git"
   },
-  "license": "GPL-3.0",
   "funding": "https://github.com/sponsors/guoyunhe",
+  "license": "GPL-3.0",
   "author": {
     "name": "Guo Yunhe",
     "email": "i@guoyunhe.me"
